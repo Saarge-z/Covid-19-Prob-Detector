@@ -28,6 +28,7 @@ if __name__ == "__main__":
     Y_test = test[['infectionProb']].to_numpy().reshape(603,) #according to sklearn reshape(size of data,)
 
 
+    '''
     # Preparations for Feature Scaling
     Xtn,Xtn2 = X_train[:,[0,2]], X_train[:,[1,3,4]]
     Xts,Xts2 = X_test[:,[0,2]], X_test[:,[1,3,4]]
@@ -42,6 +43,7 @@ if __name__ == "__main__":
     X_test = np.append(X_test, Xts2, 1)
     # After feature Scalling Index is
     # Fever, Age, bodyPain, runnnyNose, diffBreath
+    '''
 
 
     # training model
