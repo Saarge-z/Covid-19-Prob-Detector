@@ -28,23 +28,11 @@ if __name__ == "__main__":
     Y_test = test[['infectionProb']].to_numpy().reshape(603,) #according to sklearn reshape(size of data,)
 
 
-    '''
-    # Preparations for Feature Scaling
-    Xtn,Xtn2 = X_train[:,[0,2]], X_train[:,[1,3,4]]
-    Xts,Xts2 = X_test[:,[0,2]], X_test[:,[1,3,4]]
-
-
     # Feature Scaling
     sc_X = StandardScaler()
-    X_train = sc_X.fit_transform(Xtn)
-    X_test = sc_X.fit_transform(Xts)
-
-    X_train = np.append(X_train, Xtn2, 1)
-    X_test = np.append(X_test, Xts2, 1)
-    # After feature Scalling Index is
-    # Fever, Age, bodyPain, runnnyNose, diffBreath
-    '''
-
+    X_train = sc_X.fit_transform(X_train)
+    X_test = sc_X.transform(X_test)
+    
 
     # training model
     clf = LogisticRegression()
@@ -53,7 +41,7 @@ if __name__ == "__main__":
 
     # open a file, where you ant to store the data
     file = open('model.pkl', 'wb')
-
+    a =[clf, sc_X]
     # dump information to that file
-    pickle.dump(clf, file)
+    pickle.dump(a, file)
     file.close()

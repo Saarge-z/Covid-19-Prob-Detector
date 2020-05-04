@@ -5,7 +5,9 @@ app = Flask(__name__)
 
 # open a file, where you data is stored and load it
 file = open('model.pkl', 'rb')
-clf = pickle.load(file)
+model = pickle.load(file)
+clf = model[0]
+sc_X = model[1]
 file.close()
 
 @app.route('/', methods=['GET', 'POST'])
@@ -22,7 +24,7 @@ def screening():
 
         # clf.predict([[100,1,21,1,1]]) # provides us with 0 or 1 (whether we have infec or not)
         inputFeatures = [fever, pain, age, runnnyNose, diffBreath]
-        infProb = clf.predict_proba([inputFeatures])[0][1] # predicts infection prob. along with no infection prob.
+        infProb = clf.predict_proba(sc_X.transform([inputFeatures]))[0][1] # predicts infection prob. along with no infection prob.
         return render_template('view.html', inf=round(infProb*100))
     return render_template('index.html')
 

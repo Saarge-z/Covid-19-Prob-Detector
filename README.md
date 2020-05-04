@@ -19,3 +19,5 @@ Requirements for Training.py
   pip install sklearn
   pip install pickle
 ```
+***NOTE: Model has not been trained after adding feature scaling
+         Retrain the model. Then start using.
